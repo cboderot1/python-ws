@@ -17,21 +17,16 @@ def _get_percentage_change(
     )
     return percentage_change
 
-class Producto (rx.Model, table=True):
-    """el modelo de productos"""
-    
-    nombre: str
-    descripcion: str
-    precio: float
-    stock: int
-    categoria_id: int
-    estado: str
+
     
 class Category(rx.Model, table=True):
     """el modelo de categorias"""
     
     nombre: str 
-    estado: str    
+    estado: str  
+    
+
+            
     
 class Customer(rx.Model, table=True):
     """The customer model."""
@@ -54,16 +49,8 @@ class MonthValues(rx.Base):
 
 
 class State(rx.State):
-    productos: list[Producto] = []
+    """The app state."""
     
-        
-    #lista de productos
-    
-
-    def load_productos(self):
-        with rx.session() as session:
-            self.productos = session.exec(select(Producto)).all()
-
     """The app state."""
 
     users: list[Customer] = []

@@ -14,8 +14,9 @@ def navbar():
         ),
         rx.spacer(),
         rx.hstack(
-            rx.link("Clientes", href="/clientes"),
+            rx.button("Clientes", on_click=rx.redirect("/")), 
             rx.button("Productos", on_click=rx.redirect("/productos")),
+            rx.button("Ventas", on_click=rx.redirect("/ventas")),
 
             rx.color_mode.button(),
             align="center",

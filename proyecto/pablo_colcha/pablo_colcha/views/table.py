@@ -45,7 +45,7 @@ def add_customer_button() -> rx.Component:
         rx.dialog.trigger(
             rx.button(
                 rx.icon("plus", size=26),
-                rx.text("Add Customer", size="4", display=["none", "none", "block"]),
+                rx.text("Nuevo Cliente", size="4", display=["none", "none", "block"]),
                 size="3",
             ),
         ),
@@ -59,12 +59,12 @@ def add_customer_button() -> rx.Component:
                 ),
                 rx.vstack(
                     rx.dialog.title(
-                        "Add New Customer",
+                        "Nuevo Cliente",
                         weight="bold",
                         margin="0",
                     ),
                     rx.dialog.description(
-                        "Fill the form with the customer's info",
+                        "Llene el formulario con los datos del cliente",
                     ),
                     spacing="1",
                     height="100%",
@@ -81,26 +81,26 @@ def add_customer_button() -> rx.Component:
                     rx.flex(
                         # Name
                         form_field(
-                            "Name",
-                            "Customer Name",
+                            "Nombre",
+                            "nombre del cliente",
                             "text",
                             "name",
                             "user",
                         ),
                         # Email
                         form_field(
-                            "Email", "user@reflex.dev", "email", "email", "mail"
+                            "Email", "usuario@gmail.com", "email", "email", "mail"
                         ),
                         # Phone
-                        form_field("Phone", "Customer Phone", "tel", "phone", "phone"),
+                        form_field("Telefono", "Telefono cliente", "tel", "phone", "phone"),
                         # Address
                         form_field(
-                            "Address", "Customer Address", "text", "address", "home"
+                            "Direccion", "Direccion del cliente", "text", "address", "home"
                         ),
                         # Payments
                         form_field(
-                            "Payment ($)",
-                            "Customer Payment",
+                            "Payment ($)/Sueldo",
+                            "Sueldo del cliente",
                             "number",
                             "payments",
                             "dollar-sign",
@@ -114,7 +114,7 @@ def add_customer_button() -> rx.Component:
                                 spacing="2",
                             ),
                             rx.radio(
-                                ["Delivered", "Pending", "Cancelled"],
+                                ["Entregado", "Pendiente", "Cancelado"],
                                 name="status",
                                 direction="row",
                                 as_child=True,
@@ -134,7 +134,7 @@ def add_customer_button() -> rx.Component:
                         ),
                         rx.form.submit(
                             rx.dialog.close(
-                                rx.button("Submit Customer"),
+                                rx.button("Guardar", variant="solid", color_scheme="green"),
                             ),
                             as_child=True,
                         ),
@@ -357,14 +357,14 @@ def main_table():
         rx.table.root(
             rx.table.header(
                 rx.table.row(
-                    _header_cell("Name", "user"),
+                    _header_cell("Nombre", "user"),
                     _header_cell("Email", "mail"),
-                    _header_cell("Phone", "phone"),
-                    _header_cell("Address", "home"),
-                    _header_cell("Payments", "dollar-sign"),
-                    _header_cell("Date", "calendar"),
-                    _header_cell("Status", "truck"),
-                    _header_cell("Actions", "cog"),
+                    _header_cell("Telefono", "phone"),
+                    _header_cell("Direccion", "home"),
+                    _header_cell("Pagos", "dollar-sign"),
+                    _header_cell("Fecha", "calendar"),
+                    _header_cell("Estado", "truck"),
+                    _header_cell("Acciones", "cog"),
                 ),
             ),
             rx.table.body(rx.foreach(State.users, show_customer)),

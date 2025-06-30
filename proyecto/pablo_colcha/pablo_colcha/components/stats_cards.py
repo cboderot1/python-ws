@@ -91,7 +91,7 @@ def stats_card(
 def stats_cards_group() -> rx.Component:
     return rx.flex(
         stats_card(
-            "Total Customers",
+            "Total Clientes",
             State.current_month_values.num_customers,
             State.previous_month_values.num_customers,
             State.customers_change,
@@ -99,7 +99,7 @@ def stats_cards_group() -> rx.Component:
             "blue",
         ),
         stats_card(
-            "Total Payments",
+            "Pagos Total",
             State.current_month_values.total_payments,
             State.previous_month_values.total_payments,
             State.payments_change,
@@ -108,7 +108,7 @@ def stats_cards_group() -> rx.Component:
             "$",
         ),
         stats_card(
-            "Total Delivers",
+            "Total Entregado",
             State.current_month_values.num_delivers,
             State.previous_month_values.num_delivers,
             State.delivers_change,
