@@ -4,8 +4,8 @@ from pablo_colcha.backend.producto_state import ProductoState
 from pablo_colcha.backend.producto_state import Producto
 
 from pablo_colcha.backend.venta_state import VentaState
-from pablo_colcha.backend.venta_state import Venta
-from pablo_colcha.backend.venta_state import VentaConProducto
+from pablo_colcha.backend.venta_state import Venta,VentaConProducto
+
 
 from .navbar import navbar
 
