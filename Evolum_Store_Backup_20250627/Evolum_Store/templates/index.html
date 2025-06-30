@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolum Store - Tu Tienda Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            flex-grow: 1;
+        }
+        .header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2em;
+        }
+        .cart-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+        .cart-link:hover {
+            background-color: #555;
+        }
+        .products-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+            gap: 20px;
+        }
+        .product-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+        }
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            color: #2c3e50;
+        }
+        .product-info p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+        .product-price {
+            font-size: 1.4em;
+            color: #e67e22;
+            font-weight: bold;
+        }
+        .product-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        /* Estilos para mensajes flash */
+        .flash-messages {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .flash-messages .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flash-messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem 10px;
+            }
+            .header h1 {
+                font-size: 2em;
+                text-align: center;
+            }
+            .header p {
+                font-size: 1em;
+            }
+            .cart-link {
+                margin-top: 10px;
+            }
+            .products-gallery {
+                padding: 1rem;
+                gap: 15px;
+            }
+            .product-card-link {
+                width: 100%;
+                max-width: 350px;
+            }
+            .product-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Evolum Store</h1>
+        <a href="{{ url_for('cart') }}" class="cart-link">Ver Carrito</a>
+    </header>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <section class="products-gallery">
+        {% for producto in productos %}
+        <a href="{{ url_for('product_page', product_id=producto.id) }}" class="product-card-link">
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/' + producto.imagen) }}" alt="{{ producto.nombre }}">
+                <div class="product-info">
+                    <h3>{{ producto.nombre }}</h3>
+                    <p>{{ producto.descripcion_corta }}</p>
+                    <p class="product-price">
+                        ${{ "%.2f"|format(producto.precio_actual) }}
+                        {% if producto.precio_anterior %}
+                            <span class="product-old-price">${{ "%.2f"|format(producto.precio_anterior) }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </section>
+
+</body>
+</html>

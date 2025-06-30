@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+</head>
+<body>
+    <h1>Crear Nuevo Producto</h1>
+    <form method="POST">
+        Nombre: <input type="text" name="nombre"><br>
+        Precio: <input type="number" step="0.01" name="precio"><br>
+        Cantidad: <input type="number" name="cantidad"><br>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{{ url_for('lista_productos') }}">Volver</a>
+</body>
+</html>

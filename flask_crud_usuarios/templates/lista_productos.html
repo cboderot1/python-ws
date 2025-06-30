@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <a href="{{ url_for('nuevo_producto') }}">Crear nuevo producto</a>
+    <ul>
+        {% for producto in Productos %}
+            <li>
+                {{ producto.nombre }} - ${{ producto.precio }} - Cantidad: {{ producto.cantidad }}
+                <a href="{{ url_for('editar_producto', producto_id=producto.id) }}">Editar</a>
+                <a href="{{ url_for('eliminar_producto', producto_id=producto.id) }}">Eliminar</a> 
+            </li>
+        {% else %}
+            <li>No hay productos.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

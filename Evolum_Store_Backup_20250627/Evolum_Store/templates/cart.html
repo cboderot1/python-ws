@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito - Evolum Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            flex-grow: 1;
+        }
+        .header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2em;
+        }
+        .cart-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+        .cart-link:hover {
+            background-color: #555;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+            flex-shrink: 0; /* Evita que la imagen se encoja */
+        }
+        .item-details {
+            flex-grow: 1;
+            margin-right: 20px; /* Espacio entre detalles y controles */
+            min-width: 150px; /* Asegura que los detalles no sean demasiado pequeños */
+        }
+        .item-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.3em;
+            color: #2c3e50;
+        }
+        .item-details p {
+            margin: 0;
+            color: #555;
+        }
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap; /* Permite que los controles se envuelvan */
+        }
+        .item-controls input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .item-controls button {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .item-controls button:hover {
+            background-color: #0056b3;
+        }
+        .remove-item-link {
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .remove-item-link:hover {
+            text-decoration: underline;
+        }
+        .item-price {
+            font-weight: bold;
+            color: #e67e22;
+            font-size: 1.1em;
+            margin-left: auto; /* Empuja el precio a la derecha */
+            min-width: 80px;
+            text-align: right;
+        }
+        .cart-summary {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        .cart-summary p {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .cart-summary span {
+            color: #e67e22;
+        }
+        .empty-cart-message {
+            text-align: center;
+            padding: 50px 0;
+            color: #777;
+            font-size: 1.2em;
+        }
+        .back-to-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* Estilos para mensajes flash */
+        .flash-messages {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .flash-messages .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flash-messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem 10px;
+            }
+            .header h1 {
+                font-size: 2em;
+                text-align: center;
+            }
+            .cart-link {
+                margin-top: 10px;
+            }
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .cart-item img {
+                margin-bottom: 10px;
+            }
+            .item-details {
+                margin-right: 0;
+                width: 100%;
+                text-align: left;
+            }
+            .item-controls {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 10px;
+            }
+            .item-price {
+                width: 100%;
+                text-align: left;
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .cart-summary {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><a href="{{ url_for('home') }}" style="color:white; text-decoration:none;">Evolum Store</a></h1>
+    </header>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container">
+        <h2>Tu Carrito de Compras</h2>
+
+        {% if cart_items %}
+            {% for product_id, item in cart_items.items() %}
+            <div class="cart-item">
+                <img src="{{ url_for('static', filename='images/' + item.producto_info.imagen) }}" alt="{{ item.producto_info.nombre }}">
+                <div class="item-details">
+                    <h3>{{ item.producto_info.nombre }}</h3>
+                    <p>Precio Unitario: ${{ "%.2f"|format(item.producto_info.precio_actual) }}</p>
+                </div>
+                <div class="item-controls">
+                    <form action="{{ url_for('update_cart_item', product_id=product_id) }}" method="post">
+                        <input type="number" name="quantity" value="{{ item.cantidad }}" min="0">
+                        <button type="submit">Actualizar</button>
+                    </form>
+                    <a href="{{ url_for('remove_from_cart', product_id=product_id) }}" class="remove-item-link">Eliminar</a>
+                </div>
+                <span class="item-price">${{ "%.2f"|format(item.cantidad * item.producto_info.precio_actual) }}</span>
+            </div>
+            {% endfor %}
+
+            <div class="cart-summary">
+                <p>Total: <span>${{ "%.2f"|format(total) }}</span></p>
+                </div>
+        {% else %}
+            <p class="empty-cart-message">Tu carrito está vacío. ¡Explora nuestros productos!</p>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="back-to-home">&lt; Volver a la Tienda</a>
+    </div>
+
+</body>
+</html>

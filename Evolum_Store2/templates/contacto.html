@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Evolum Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        /* ESTILOS DEL HEADER (CABECERA) - Comunes a todas las páginas */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        /* ESTILOS DE NAVEGACIÓN - Comunes a todas las páginas */
+        .header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .header nav ul li {
+            margin-left: 20px;
+        }
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .header nav ul li a:hover {
+            background-color: #555;
+            border-color: #fff;
+        }
+        /* ESTILOS DEL ENLACE DEL CARRITO - Comunes a todas las páginas */
+        .cart-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-left: 20px;
+        }
+        .cart-link:hover {
+            background-color: #555;
+        }
+
+        /* ESTILOS PARA MENSAJES FLASH - Comunes a todas las páginas */
+        .flash-messages {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+        .flash-messages .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .flash-messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ESPECÍFICOS DE contacto.html */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .container h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .contact-info a {
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .back-to-home { /* Reutilizamos el estilo del botón de volver a inicio */
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            font-size: 1.1em;
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-to-home:hover {
+            text-decoration: underline;
+        }
+
+        /* ESTILOS RESPONSIVOS (Comunes a todas las páginas) */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 10px;
+            }
+            .header h1 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .header nav {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .header nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .header nav ul li {
+                margin: 5px 0;
+            }
+            .cart-link {
+                margin: 10px auto;
+                width: fit-content;
+            }
+            /* Específicos para contacto.html en móvil (si los hubiera, pero aquí son pocos) */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Evolum Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('home') }}">Catálogo</a></li> {# Por ahora, apunta a la Home #}
+                <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="{{ url_for('cart') }}" class="cart-link">Ver Carrito</a>
+    </header>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container">
+        <h2>¡Contáctanos!</h2>
+        <div class="contact-info">
+            <p>¿Tienes alguna pregunta, sugerencia o comentario? ¡Nos encantaría escucharte!</p>
+            <p>Puedes escribirnos a:</p>
+            <p>Email: <a href="mailto:info@evolumstore.com">info@evolumstore.com</a></p>
+            <p>O llámanos al: <a href="tel:+593999999999">+593 99 999 9999</a></p>
+            <p>También nos encuentras en nuestras redes sociales:</p>
+            <p>Facebook: <a href="#" target="_blank">Evolum Store FB</a></p>
+            <p>Instagram: <a href="#" target="_blank">@EvolumStore</a></p>
+        </div>
+        <a href="{{ url_for('home') }}" class="back-to-home">&lt; Volver a la página principal</a>
+    </div>
+</body>
+</html>

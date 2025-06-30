@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="text-center my-5">
+        <h1 class="display-4 fw-bold mb-4">Bienvenido a tu Aplicación Web CRUD</h1>
+        <p class="lead mb-4">
+            Esta es una aplicación sencilla construida con Flask y Python.
+            <br>
+            Puedes gestionar información de usuarios de forma fácil.
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+            <a href="{{ url_for('usuarios') }}" class="btn btn-primary btn-lg me-2">
+                <i class="fas fa-users"></i> Ir a Usuarios
+            </a>
+            <a href="#" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-info-circle"></i> Más Información
+            </a>
+        </p>
+    </div>
+{% endblock %}
