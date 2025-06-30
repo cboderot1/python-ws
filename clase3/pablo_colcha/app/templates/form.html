@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mb-4">{{ accion }} Usuario</h1>
+    
+    <form method="POST" action="">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.nombre if usuario.nombre else '' }}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correo" name="correo" value="{{ usuario.correo if usuario.correo else '' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{ usuario.telefono if usuario.telefono else '' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ usuario.fecha_nacimiento if usuario.fecha_nacimiento else '' }}" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+        <script>
+        function debugForm(event) {
+            event.preventDefault(); 
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            console.log(`📤 Enviando formulario (${event.target.method}):`, data);
+
+        }
+    </script>
+{% endblock %}

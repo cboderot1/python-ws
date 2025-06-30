@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mb-4">Lista de Categorías</h1>
+
+    <a href="{{ url_for('categorys.crear') }}" class="btn btn-primary mb-3">Crear Categoría</a>
+
+    {% if categorias %}
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in categorias %}
+            <tr>
+              <td>{{ c.nombre }}</td>
+              <td>{{ c.fecha_creacion.strftime('%Y-%m-%d') if c.fecha_creacion else '' }}</td>
+              <td>
+                <a href="{{ url_for('categorys.editar', id=c.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('categorys.eliminar', id=c.id) }}" class="btn btn-sm btn-danger">Eliminar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No hay categorías registradas.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+

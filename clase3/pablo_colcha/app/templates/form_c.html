@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mb-4">{{ accion }} Categoría</h1>
+    
+    <form method="POST" action="">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ categoria.nombre if categoria and categoria.nombre else '' }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{ url_for('categorys.listar') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}
