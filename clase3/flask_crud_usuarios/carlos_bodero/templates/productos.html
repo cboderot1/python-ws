@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Lista de Productos{% endblock %}
+{% block content %}
+<h2 class="center">Lista de Productos</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>{{ producto.categoria }}</td>
+            <td>
+                <a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a>
+                <a href="{{ url_for('eliminar_producto', id=producto.id) }}" onclick="return confirm('¿Seguro de eliminar?');">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
