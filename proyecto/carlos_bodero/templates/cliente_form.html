@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ action }} Cliente</h2>
+<form method="post">
+    Nombre: <input type="text" name="nombre" value="{{ cliente.nombre if cliente else '' }}"><br>
+    Teléfono: <input type="text" name="telefono" value="{{ cliente.telefono if cliente else '' }}"><br>
+    <input type="submit" value="{{ action }}">
+</form>
+{% endblock %}

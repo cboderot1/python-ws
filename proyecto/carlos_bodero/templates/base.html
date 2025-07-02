@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Ventas</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a> |
+        <a href="{{ url_for('productos.lista') }}">Productos</a> |
+        <a href="{{ url_for('clientes.lista') }}">Clientes</a> |
+        <a href="{{ url_for('ventas.lista') }}">Ventas</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Ventas</h2>
+<a href="{{ url_for('ventas.agregar') }}">Registrar Venta</a>
+<table border="1">
+    <tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Acciones</th></tr>
+    {% for v in ventas %}
+    <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.cliente.nombre }}</td>
+        <td>{{ v.producto.nombre }}</td>
+        <td>
+            <a href="{{ url_for('ventas.eliminar', id=v.id) }}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
