@@ -4,6 +4,7 @@ from .components.stats_cards import stats_cards_group
 from .views.navbar import navbar
 from .views.table import main_table
 from pablo_colcha.views.productos_page import productos_page
+from .views.ventas_page import pagina_ventas
 
 
 def index() -> rx.Component:
@@ -38,3 +39,7 @@ app.add_page(
     title="Productos",
     description="Página de productos",
 )
+
+app.add_page(
+    pagina_ventas, route="/ventas", title="Gestión de Ventas")
+
